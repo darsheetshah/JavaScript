@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Javascript Validations</title>
+<script type ="text/javascript">
+function validateForm()
+{
+	"use strict";
+	//document.getElementById gives us the reference to the HTML element and we can access various methods/properties like .value, .length, .innetHTML,		 .innertext, etc on it
+
+	//Use innerHTML for labels and paragraph and other related tags
+	//Use value for textbox, etc from where value is to be extracted
+	//var userTest = document.getElementById("username")
+	
+	if(document.getElementById("username").value=="")
+	{
+		alert("Please enter username");
+		document.getElementById("username").focus();
+		document.testForm.username.focus();
+		return false;
+	}
+	//can also be done using the traditional method
+	//else if(document.getElementById("username").value.length < 5)
+	else if(document.testForm.username.value.length < 5)
+	{
+		alert("Username should be atleast 5 characters long");
+		return false;
+	}
+
+	if(true)
+	{
+	// this doesnt work var msg = document.testForm.genderGroup.value;
+	var msg = document.getElementsByName("genderGroup");
+	var choose=msg.value;
+	for(var i=0;i<msg.length;i++)
+	{
+		if(msg[i].checked)
+		{
+		//alert("you have selected gender as" + msg[i].value)
+		choose=msg[i].value;
+		return true;
+		}
+	}
+	alert("select your gender")
+	return false;
+	}
+	
+	if(document.testForm.genderGroup.value==null)
+	{
+		alert("Please select gender")
+		return false;
+	}
+
+	var what = validateEmailAndLowerCase()
+	if(what=="false")
+	return false;	
+}
+
+function validateEmailAndLowerCase()
+{
+
+	alert("enter valid email address");
+	alert("changed to lower case");
+	//document.testform.email.focus();
+	return false;
+}
+
+function changeText()
+{
+	document.getElementById("l_username").innerHTML="Enter your name";
+	document.getElementById("l_username").style.fontSize="20";
+	document.getElementById("l_password").innerHTML="Enter your password";
+	document.getElementById("l_email").innerHTML="Enter your email";
+	document.getElementById("l_age").innerHTML="Enter your age";
+}
+</script>
+
+
+
+</head>
+
+<body>
+<!--<input type="text" id="username12"/>
+<input type="button" onclick="validateform()" />-->
+
+<!-- we can do this way also instead of onclinck event on button-->
+<!-- should have return value for onsubmit event or else the form will be submitted in spite of errors-->
+<form name="testForm" onsubmit="return validateForm()" action="practice2.html" method="post">
+
+<table>
+<tr>
+<td>
+<p id="l_username">Username</p>
+</td>
+<td>
+<input type = "text" id = "username" />
+</td>
+</tr>
+<tr>
+<td>
+<label id="l_password">Password </label>
+</td>
+<td>
+<input type = "password" id = "password" />
+</td>
+</tr>
+<tr>
+<td>
+<label id="l_email"> Email </label>
+</td>
+<td>
+<input type = "text" id = "email" onblur="validateEmailAndLowerCase()"/>
+</td>
+</tr>
+<tr>
+<td>
+<h3 id="l_age"> Age </h3>
+</td>
+<td>
+<input type = "text" id = "age" />
+</td>
+</tr>
+</table>
+<label id="l_gender"> Gender </label>
+<input type="radio" name="genderGroup" value="male"/> Male <br />
+<input type="radio" name="genderGroup" value="female"/> Female <br />
+<input type="radio" name="genderGroup" value="undisclosed"/> Undisclosed <br />
+
+
+
+<br />
+Check if you agree the terms
+<br />
+<input type="submit" value="Submit" />
+
+<input type="button" value="Change Text" onclick="changeText()" />
+</form>
+</body>
+</html>
