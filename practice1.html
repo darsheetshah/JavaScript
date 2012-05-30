@@ -6,7 +6,7 @@
 <script type ="text/javascript">
 function validateForm()
 {
-	"use strict";
+	//"use strict";
 	//document.getElementById gives us the reference to the HTML element and we can access various methods/properties like .value, .length, .innetHTML,		 .innertext, etc on it
 
 	//Use innerHTML for labels and paragraph and other related tags
@@ -51,6 +51,14 @@ function validateForm()
 		alert("Please select gender")
 		return false;
 	}
+	
+	if(true)
+	{
+	//age text box validation goes here
+	return false;
+	}
+	
+	
 
 	var what = validateEmailAndLowerCase()
 	if(what=="false")
@@ -59,10 +67,20 @@ function validateForm()
 
 function validateEmailAndLowerCase()
 {
-
+	var regex = /^([A-Za-z0-9_\-\.])+\@+([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	var emailadd=document.testForm.email.value; //Traditional method
+	emailadd=document.forms[testForm].elements[email].value; //DOM method to get value of text box
+	//alert("email entered is "+emailadd);
+	if(regex.test(emailadd)==false)
+	{
 	alert("enter valid email address");
+	return false
+	}
 	alert("changed to lower case");
+	
+	
 	//document.testform.email.focus();
+	
 	return false;
 }
 
@@ -86,7 +104,7 @@ function changeText()
 
 <!-- we can do this way also instead of onclinck event on button-->
 <!-- should have return value for onsubmit event or else the form will be submitted in spite of errors-->
-<form name="testForm" onsubmit="return validateForm()" action="practice2.html" method="post">
+<form name="testForm" onsubmit="return validateEmailAndLowerCase()" action="practice2.html" method="post">
 
 <table>
 <tr>
